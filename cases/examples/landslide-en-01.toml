@@ -1,0 +1,33 @@
+# ILLUSTRATIVE EXAMPLE: not an official bulletin. Values are made up to demonstrate the checks.
+id = "landslide-en-01"
+language = "en"
+note = "Illustrative landslide road alert (made-up values) in English."
+
+source = """
+Landslide alert: the Prithvi Highway is blocked at Km 42 near Mugling after 120 mm of rain
+in 24 hours. Clearing is expected to take until 18:00 on 2081-05-12. Travellers should
+avoid the route and use the alternative road via Narayanghat.
+"""
+
+# Context numbers that may be left out (but never changed):
+may_drop = ["24"]
+
+must_keep = [
+  ["Prithvi Highway", "पृथ्वी राजमार्ग"],
+  ["Mugling", "मुग्लिन"],
+  ["Narayanghat", "नारायणगढ"],
+]
+
+[[candidates]]
+system = "example-faithful"
+text = """
+Warning: Prithvi Highway is closed at Km 42 near Mugling after 120 mm of rain.
+It should reopen by 18:00 on 2081-05-12. Please avoid it and go via Narayanghat instead.
+"""
+
+[[candidates]]
+system = "example-drops-facts"
+text = """
+Warning: Prithvi Highway is closed near Mugling because of heavy rain.
+It should reopen by evening. Please avoid the road.
+"""

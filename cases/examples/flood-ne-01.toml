@@ -1,0 +1,30 @@
+# ILLUSTRATIVE EXAMPLE: not an official bulletin. Values are made up to demonstrate the checks.
+id = "flood-ne-01"
+language = "ne"
+note = "Illustrative flood warning (made-up values). Shows a faithful rewrite and an unsafe one."
+
+source = """
+बाढी चेतावनी: नारायणी नदीको देवघाट मापन केन्द्रमा पानीको सतह ६.८ मिटर पुगेको छ,
+जुन खतराको तह ६.५ मिटरभन्दा माथि हो। आज साँझ ७:०० बजेसम्म सतह अझै बढ्न सक्छ।
+नदी किनारका बासिन्दाहरूलाई तुरुन्त सुरक्षित उच्च स्थानमा सर्न अनुरोध छ।
+"""
+
+# Each group lists acceptable spellings. At least one must appear in the output.
+must_keep = [
+  ["नारायणी", "Narayani"],
+  ["देवघाट", "Devghat"],
+]
+
+[[candidates]]
+system = "example-faithful"
+text = """
+सावधान! नारायणी नदी देवघाटमा ६.८ मिटर पुगेको छ, खतराको तह ६.५ मिटरभन्दा माथि।
+साँझ ७:०० बजेसम्म पानी अझै बढ्न सक्छ। नदी किनारमा बस्नेहरू तुरुन्तै अग्लो ठाउँमा जानुहोस्।
+"""
+
+[[candidates]]
+system = "example-unsafe"
+text = """
+सावधान! नारायणी नदीमा ८.६ मिटर पानी छ। राति ९:०० बजेसम्म पानी बढ्न सक्छ।
+नदी किनारमा बस्नेहरू अग्लो ठाउँमा जानुहोस्।
+"""

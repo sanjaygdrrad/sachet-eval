@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install -e ".[dev]"
+
+      - name: Unit tests
+        run: pytest -q
+
+      - name: Faithfulness report on the example cases
+        run: |
+          sachet eval cases/ --out report.md
+          cat report.md >> "$GITHUB_STEP_SUMMARY"

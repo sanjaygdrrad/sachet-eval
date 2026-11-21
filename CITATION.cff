@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use Sachet Eval, please cite it as below."
+title: "Sachet Eval: an evaluation harness for LLM + text-to-speech disaster alerts in Nepal"
+authors:
+  - family-names: Bhandari
+    given-names: Sanzay
+version: 0.1.0
+date-released: 2026-11-22
+license: MIT
+repository-code: "https://github.com/sanjaygdrrad/sachet-eval"
+keywords: [Nepal, disaster communication, early warning, LLM evaluation, text-to-speech, Nepali]
