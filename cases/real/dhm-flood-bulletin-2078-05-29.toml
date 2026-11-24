@@ -1,0 +1,64 @@
+# REAL public bulletin: DHM Flood Forecasting Division, Flood Forecast Bulletin, 2078-05-29 (14 Sep 2021), 07:00.
+# Source PDF (republished by DAO Bhojpur):
+#   https://daobhojpur.moha.gov.np/upload/0c86b0873e4e04ba18d1308320f56ab7/files/Flood_Bulletin_14Sep_2021_7AM_(%E0%A4%AD%E0%A4%A6%E0%A5%8C_%E0%A5%A8%E0%A5%AF).pdf
+# The text copied from the PDF loses conjunct letters (legacy font encoding); see the .raw.txt file next to this one.
+# `source` below is a manual reconstruction of the relevant sections (river status, advisory, hotline),
+# made by comparing the garbled copy with standard spelling. Please verify against the PDF.
+id = "dhm-flood-bulletin-2078-05-29"
+language = "ne"
+issuer = "Department of Hydrology and Meteorology (DHM), Flood Forecasting Division, Government of Nepal"
+issued = "2078-05-29 07:00 (BS) · 2021-09-14"
+source_url = "https://daobhojpur.moha.gov.np/upload/0c86b0873e4e04ba18d1308320f56ab7/files/Flood_Bulletin_14Sep_2021_7AM_(%E0%A4%AD%E0%A4%A6%E0%A5%8C_%E0%A5%A8%E0%A5%AF).pdf"
+note = "Real bulletin. Candidates are hand-written references and one deliberately flawed example, not AI outputs yet."
+
+source = """
+बाढी पूर्वानुमान बुलेटिन (जारी मिति: २०७८-०५-२९ गते बिहान ०७ बजे)
+
+नदीहरूको हालको अवस्था: आज बिहानको मापन अनुसार कोशी, नारायणी, कर्णाली, महाकाली र यिनका सहायक नदीहरूको बहाव सामान्य तथा सतर्कता तह भन्दा तलै रहेको छ।
+
+सरोकारवालाका लागि परामर्श: प्रदेश १ को झापा, मोरङ, सुनसरी, उदयपुर; बागमती प्रदेशको सिन्धुपाल्चोक, नुवाकोट, सिन्धुली, मकवानपुर; गण्डकी प्रदेशको गोरखा, लमजुङ, कास्की, स्याङ्जा, पर्वत; लुम्बिनी प्रदेशको पाल्पा, गुल्मी, रोल्पा; कर्णाली प्रदेशको जुम्ला, जाजरकोट, दैलेख, कालिकोट; सुदूरपश्चिम प्रदेशको दार्चुला, बझाङ, कञ्चनपुर र आसपासका जिल्ला भई बग्ने साना-साना नदीहरूमा बहाव बढ्ने र केहीमा आकस्मिक बहाव (Flash Flood) हुन सक्ने पूर्वानुमान रहेकाले उक्त नदीहरूका तटीय क्षेत्र तथा डुबान भइरहने क्षेत्रहरूमा सतर्कता अपनाऔं।
+
+देशैभरका सर्वसाधारणको लागि ११५५ नम्बरको टोल-फ्री सेवा बाढी पूर्वसूचना प्रदान गर्ने उद्देश्यले मनसुनभर सञ्चालन गरिएको छ। जो कोहीले ११५५ डायल गरेर बाढी सम्बन्धी पूर्वसूचना लिन सक्नेछ।
+"""
+
+# "प्रदेश १" is now Koshi Province, so a modern rewrite may drop the "1".
+may_drop = ["1"]
+
+must_keep = [
+  # rivers in the current-status line
+  ["कोशी", "Koshi", "Kosi"], ["नारायणी", "Narayani"], ["कर्णाली", "Karnali"], ["महाकाली", "Mahakali"],
+  # districts named in the advisory
+  ["झापा", "Jhapa"], ["मोरङ", "Morang"], ["सुनसरी", "Sunsari"], ["उदयपुर", "Udayapur"],
+  ["सिन्धुपाल्चोक", "Sindhupalchok", "Sindhupalchowk"], ["नुवाकोट", "Nuwakot"], ["सिन्धुली", "Sindhuli"], ["मकवानपुर", "Makwanpur"],
+  ["गोरखा", "Gorkha"], ["लमजुङ", "Lamjung"], ["कास्की", "Kaski"], ["स्याङ्जा", "स्याङजा", "Syangja"], ["पर्वत", "Parbat"],
+  ["पाल्पा", "Palpa"], ["गुल्मी", "Gulmi"], ["रोल्पा", "Rolpa"],
+  ["जुम्ला", "Jumla"], ["जाजरकोट", "Jajarkot"], ["दैलेख", "Dailekh"], ["कालिकोट", "Kalikot"],
+  ["दार्चुला", "Darchula"], ["बझाङ", "Bajhang"], ["कञ्चनपुर", "Kanchanpur"],
+  # the hazard itself
+  ["आकस्मिक", "अचानक", "Flash Flood", "flash flood"],
+]
+
+[[candidates]]
+system = "reference-plain-ne (hand-written)"
+text = """
+बाढी सूचना (२०७८-०५-२९, बिहान ७ बजे): कोशी, नारायणी, कर्णाली र महाकाली नदीमा पानी अहिले सामान्य छ, सतर्कता तहभन्दा तल छ।
+तर झापा, मोरङ, सुनसरी, उदयपुर, सिन्धुपाल्चोक, नुवाकोट, सिन्धुली, मकवानपुर, गोरखा, लमजुङ, कास्की, स्याङ्जा, पर्वत, पाल्पा, गुल्मी, रोल्पा,
+जुम्ला, जाजरकोट, दैलेख, कालिकोट, दार्चुला, बझाङ र कञ्चनपुरका साना खोलामा पानी बढ्न सक्छ र अचानक बाढी (Flash Flood) आउन सक्छ।
+खोला किनार र डुबान हुने ठाउँमा सतर्क रहनुहोस्। बाढीको जानकारीका लागि ११५५ मा निःशुल्क फोन गर्नुहोस्।
+"""
+
+[[candidates]]
+system = "reference-plain-en (hand-written)"
+text = """
+Flood notice (2078-05-29, 7 am): the Koshi, Narayani, Karnali and Mahakali rivers are normal and below the warning level.
+But small rivers in Jhapa, Morang, Sunsari, Udayapur, Sindhupalchok, Nuwakot, Sindhuli, Makwanpur, Gorkha, Lamjung, Kaski,
+Syangja, Parbat, Palpa, Gulmi, Rolpa, Jumla, Jajarkot, Dailekh, Kalikot, Darchula, Bajhang and Kanchanpur may rise, and flash floods are possible.
+Stay alert near riverbanks and in areas that often flood. For flood information, call 1155 (free).
+"""
+
+[[candidates]]
+system = "flawed-example (hand-made, illustrative errors)"
+text = """
+बाढी सूचना: ठूला नदीहरू सामान्य छन्। झापा, मोरङ, गोरखा, कास्की र पाल्पाका साना खोलामा अचानक बाढी आउन सक्छ।
+सतर्क रहनुहोस्। जानकारीका लागि १११५ मा फोन गर्नुहोस्।
+"""

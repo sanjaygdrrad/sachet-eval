@@ -8,12 +8,13 @@ Every monsoon, official flood and landslide warnings in Nepal are technical, Nep
 
 But an alert that is easy to understand and **wrong** is worse than no alert. *Sachet* (सचेत, "alert, aware") tests whether AI pipelines can be trusted with that job.
 
-> **Status:** early research tool (v0.1). Phase 1, factual faithfulness, works today. The example cases are **illustrative**, not official bulletins.
+> **Status:** early research tool (v0.2). Factual faithfulness and text-integrity checks work today, tested on a **real DHM flood bulletin** (`cases/real/`) and on clearly-labelled illustrative examples (`cases/examples/`).
 
 ## What it checks
 
 | Metric | Question | Status |
 |---|---|---|
+| **Text integrity** | Is the official text intact before it enters a pipeline? (PDFs in legacy fonts lose conjunct letters) | ✅ v0.2 |
 | **Faithfulness** | Does the rewrite keep every critical fact (levels, times, dates, places) and invent none? | ✅ v0.1 |
 | **Intelligibility** | Does the spoken audio say what the script says? Measured with speech recognition and word error rate (WER) | 🧩 WER ready; ASR integration next |
 | **Comprehension** | Do listeners recall *where, when and what to do*? | 📋 planned (human study) |
@@ -34,6 +35,22 @@ Example output (from the illustrative cases in `cases/examples/`):
 | `flood-ne-01` | example-faithful | 5/5 (100%) | – | – | ✅ pass |
 | `flood-ne-01` | example-unsafe | 1/5 (20%) | 6.5, 6.8, 7:00, देवघाट | 8.6, 9:00 | ❌ fail |
 
+## Finding: official PDFs can corrupt Nepali text
+Text copied from a real DHM flood bulletin (PDF) came out like this:
+
+| Copied from the PDF | Should read |
+|---|---|
+| `जल ोत` | जल **स्रोत** |
+| `मौसम िव ान िवभाग` | मौसम **विज्ञान** विभाग |
+| `सतकता तह भदा तलै` | **सतर्कता** तह **भन्दा** तलै |
+| `११५५ नंवरको टोल-ि सेवा` | ११५५ नम्बरको **टोल-फ्री** सेवा |
+
+The legacy font encoding drops conjunct letters, so any pipeline that reads the PDF directly hands broken Nepali to the LLM and TTS. `sachet lint` catches it: **14 broken words out of 163 (9%)** in that copy.
+
+```bash
+sachet lint cases/real/dhm-flood-bulletin-2078-05-29.raw.txt
+```
+
 ## Quick start
 
 Requires Python 3.11+. No other dependencies.
@@ -41,6 +58,7 @@ Requires Python 3.11+. No other dependencies.
 ```bash
 pip install -e ".[dev]"
 sachet eval cases/                       # Markdown report
+sachet lint some-bulletin.txt            # check for corrupted Devanagari
 sachet eval cases/ --json --out r.json   # machine-readable
 sachet eval cases/ --strict              # exit code 1 if anything fails (for CI)
 pytest                                   # the evaluator's own tests
@@ -58,6 +76,9 @@ source = """
 """
 must_keep = [["नारायणी", "Narayani"], ["देवघाट", "Devghat"]]
 may_drop  = []          # context numbers that may be omitted
+source_url = "https://…" # where the official text came from (optional)
+issuer = "…"             # optional
+issued = "…"             # optional
 
 [[candidates]]
 system = "llm-a-simplify-v1"

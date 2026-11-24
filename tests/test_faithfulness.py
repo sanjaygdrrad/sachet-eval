@@ -34,3 +34,12 @@ def test_may_drop_allows_omission_but_not_change():
 
 def test_no_facts_means_full_score():
     assert check_faithfulness("Stay safe.", "Stay safe!").score == 1.0
+
+
+def test_a_fact_repeated_in_the_source_only_needs_to_appear_once():
+    src = "११५५ नम्बरको टोल-फ्री सेवा ... जो कोहीले ११५५ डायल गरेर"
+    assert check_faithfulness(src, "call 1155 (free)").passed
+
+
+def test_repeating_a_correct_fact_in_the_output_is_fine():
+    assert check_faithfulness("level 6.8 m", "6.8 m, I repeat, 6.8 m").passed

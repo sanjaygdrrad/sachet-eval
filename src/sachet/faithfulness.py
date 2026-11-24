@@ -45,18 +45,16 @@ def check_faithfulness(source: str, output: str, must_keep: list[list[str]] | No
     src, out = extract_facts(source), extract_facts(output)
     optional = {f for f in src if any(f in extract_facts(x) for x in (may_drop or []))}
 
-    for fact in sorted(src):
-        if fact in optional and out.get(fact, 0) == 0:
+    # A fact counts once: repeating "1155" twice in the official text doesn't require
+    # the rewrite to repeat it. What matters is that it is present, and unchanged.
+    for fact in sorted(set(src)):
+        if fact in optional and fact not in out:
             continue  # allowed to be left out
-        need, have = src[fact], out.get(fact, 0)
-        res.total += need
-        res.kept += [str(fact)] * min(need, have)
-        res.missing += [str(fact)] * max(0, need - have)
+        res.total += 1
+        (res.kept if fact in out else res.missing).append(str(fact))
 
-    for fact in sorted(out):
-        extra = out[fact] - src.get(fact, 0)
-        if extra > 0 and fact not in src:
-            res.invented += [str(fact)] * extra
+    for fact in sorted(set(out) - set(src)):
+        res.invented.append(str(fact))
 
     out_norm = normalize(output)
     for aliases in must_keep or []:

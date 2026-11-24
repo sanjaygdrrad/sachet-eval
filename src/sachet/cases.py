@@ -21,6 +21,9 @@ class Case:
     may_drop: list[str] = field(default_factory=list)
     candidates: list[Candidate] = field(default_factory=list)
     note: str = ""
+    issuer: str = ""
+    issued: str = ""
+    source_url: str = ""
     path: Path | None = None
 
 
@@ -34,6 +37,7 @@ def load_case(path: str | Path) -> Case:
     return Case(
         id=data["id"], language=data["language"], source=data["source"].strip(),
         must_keep=groups, may_drop=[str(x) for x in data.get("may_drop", [])], note=data.get("note", ""), path=path,
+        issuer=data.get("issuer", ""), issued=str(data.get("issued", "")), source_url=data.get("source_url", ""),
         candidates=[Candidate(system=c["system"], text=c["text"].strip()) for c in data.get("candidates", [])],
     )
 
@@ -41,5 +45,10 @@ def load_case(path: str | Path) -> Case:
 def load_cases(paths: list[str | Path]) -> list[Case]:
     files: list[Path] = []
     for p in map(Path, paths):
+        if not p.exists():
+            raise FileNotFoundError(f"'{p}' not found (current folder: {Path.cwd()}). "
+                                    "Run sachet from the project folder, or give the full path.")
         files += sorted(p.rglob("*.toml")) if p.is_dir() else [p]
+    if not files:
+        raise FileNotFoundError(f"No .toml case files found in: {', '.join(map(str, paths))}")
     return [load_case(f) for f in files]

@@ -11,14 +11,17 @@ Sachet Eval is the open measurement layer: it scores each stage, so different LL
 
 ## Phases
 
-### Phase 1: faithfulness ✅ (v0.1)
+### Phase 1: faithfulness and text integrity ✅ (v0.2)
 - [x] Normalisation for Nepali (Devanagari digits, number grouping, zero-width joiners)
 - [x] Extraction of dates, times and numbers
 - [x] `must_keep` name groups with spelling aliases; `may_drop` context numbers
 - [x] Strict pass/fail verdict; Markdown and JSON reports; CLI; CI
 - [ ] Nepali number **words** (e.g. तीन → 3) and Bikram Sambat month names
 - [ ] Units-aware comparison (6.8 m vs 680 cm)
-- [ ] First **public** cases from official bulletins
+- [x] First real case: DHM Flood Forecast Bulletin, 2078-05-29 (`cases/real/`), with source link and metadata
+- [x] `sachet lint`: detects Devanagari corrupted by legacy-font PDF extraction (finding: 9% broken words in the copied bulletin)
+- [ ] More real cases: a bulletin **above danger level**, an NDRRMA heavy-rain advisory, a public SMS alert
+- [ ] Unicode conversion of legacy-font (Preeti-style) PDF text, and measuring how much it recovers
 
 ### Phase 2: intelligibility
 - [x] Word error rate for Devanagari and Latin scripts

@@ -36,6 +36,11 @@ def to_markdown(rows: list[Row]) -> str:
             f"| {', '.join(res.missing) or '–'} | {', '.join(res.invented) or '–'} | {'✅ pass' if res.passed else '❌ fail'} |"
         )
     out += ["", "_Missing = in the official alert but not in the output. Invented = in the output but not in the official alert._", ""]
+    sourced = {r.case.id: r.case for r in rows if r.case.source_url}
+    if sourced:
+        out += ["## Sources", ""]
+        out += [f"- `{c.id}`: {c.issuer or 'source'}, {c.issued or 'date n/a'}: <{c.source_url}>" for c in sourced.values()]
+        out.append("")
     return "\n".join(out)
 
 
