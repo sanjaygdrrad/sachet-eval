@@ -10,6 +10,7 @@ language = "ne"
 issuer = "राष्ट्रिय विपद् जोखिम न्यूनीकरण तथा व्यवस्थापन प्राधिकरण (NDRRMA) — गति मार्फत प्रसारित"
 issued = "2026-09-27T08:00:00+05:45"
 source_url = "https://x.com/NDRRMA_Nepal/status/2104050743875653646"
+relayed_by = "Gati"
 note = "Imported from a CAP 1.2 alert. Candidates are the other-language versions and summaries contained in the same alert."
 
 source = """
@@ -27,6 +28,8 @@ must_keep = [
   ["नवलपरासी पश्चिम", "Nawalparasi West"],
 ]
 may_drop = []
+# For SMS: the place names that must survive (numbers are optional in SMS).
+sms_must_keep = [["नारायणी", "Narayani"], ["चितवन", "Chitwan"], ["नवलपरासी पूर्व", "Nawalparasi East"], ["नवलपरासी पश्चिम", "Nawalparasi West"]]
 may_add = []
 
 [[candidates]]
@@ -41,12 +44,14 @@ Move to high, safe ground now. Stay away from river banks and low-lying areas.
 
 [[candidates]]
 system = "gati:summary160 ne-np"
+channel = "sms"
 text = """
 नारायणी नदी खतराको तह पार गरेको छ
 """
 
 [[candidates]]
 system = "gati:summary160 en"
+channel = "sms"
 text = """
 The Narayani River has crossed the danger level
 """

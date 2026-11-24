@@ -8,7 +8,7 @@ Every monsoon, official flood and landslide warnings in Nepal are technical, Nep
 
 But an alert that is easy to understand and **wrong** is worse than no alert. *Sachet* (सचेत, "alert, aware") tests whether AI pipelines can be trusted with that job.
 
-> **Status:** early research tool (v0.2). Factual faithfulness and text-integrity checks work today, tested on a **real DHM flood bulletin** (`cases/real/`) and on clearly-labelled illustrative examples (`cases/examples/`).
+> **Status:** early research tool (v0.4). Factual faithfulness and text-integrity checks work today, tested on a **real DHM flood bulletin** (`cases/real/`) and on clearly-labelled illustrative examples (`cases/examples/`).
 
 ## What it checks
 
@@ -16,11 +16,31 @@ But an alert that is easy to understand and **wrong** is worse than no alert. *S
 |---|---|---|
 | **Text integrity** | Is the official text intact before it enters a pipeline? (PDFs in legacy fonts lose conjunct letters) | ✅ v0.2 |
 | **Faithfulness** | Does the rewrite keep every critical fact (levels, times, dates, places) and invent none? | ✅ v0.1 |
+| **Meaning** | Hazard, status (**above/below** warning or danger level), trend (rising/falling) and action survive, with no flipped meaning | ✅ v0.4 |
+| **Channel profiles** | SMS keeps the place, status and action; radio/phone scripts keep everything | ✅ v0.4 |
 | **Intelligibility** | Does the spoken audio say what the script says? Measured with speech recognition and word error rate (WER) | 🧩 WER ready; ASR integration next |
 | **Comprehension** | Do listeners recall *where, when and what to do*? | 📋 planned (human study) |
 | **Channel robustness** | Is it still clear over an 8 kHz phone line, FM radio, a loudspeaker? | 📋 planned |
 | **Latency & cost** | Time from bulletin to broadcast-ready audio; cost per minute | 📋 planned |
 | **Offline readiness** | Can it run on a laptop or edge device when the internet and power are down? | 📋 planned |
+
+### What counts as "important"
+Each rewrite is checked against the official alert for:
+
+| Fact | Example | SMS | Radio / phone script |
+|---|---|---|---|
+| **What**: the hazard | flood, flash flood, landslide | ✅ | ✅ |
+| **Where**: river, station, districts (`must_keep` / `sms_must_keep`) | Narayani, Chitwan | ✅ | ✅ |
+| **Status**: above/below warning or danger level | *above the danger level* | ✅ | ✅ |
+| **Numbers**: levels, thresholds, times, dates, hotline | 11 m, 8 AM, 1155 | only `sms_keep_numbers` | ✅ |
+| **Trend** | rising / falling | – | ✅ |
+| **Action** | move to high ground, keep away from the river | ✅ | ✅ |
+| **Nothing invented or flipped** | no new numbers; *above* never becomes *below* | ✅ | ✅ |
+
+A rewrite **passes** only if every required item is present and nothing is invented or flipped. Detection is rule-based (Nepali and English keyword lists) so every decision can be read and audited. These definitions are a starting point, to be validated against human judgement and with agencies, broadcasters and listeners.
+
+### Scope: Sachet does not verify that an alert is official
+Sachet checks a rewrite **against the text it is given**. Each case records where that text came from, and reports label it **official** (an agency domain or account), **relayed from official** (e.g. via Gati), or **unverified source**. Confirming that an alert is genuine is the job of the issuing agency. Digitally signed CAP alerts would make this verifiable, and would be a valuable step for Nepal's agencies.
 
 ### Faithfulness (v0.1)
 - Extracts **dates, times and numbers** from the official alert and the rewrite. **Devanagari and Latin digits are treated as equal** (`६.८` = `6.8`), and Nepali number grouping (`1,00,000`) is understood.

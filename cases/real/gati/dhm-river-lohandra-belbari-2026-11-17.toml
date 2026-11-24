@@ -10,6 +10,7 @@ language = "ne"
 issuer = "जल तथा मौसम विज्ञान विभाग · विपद् पोर्टल (BIPAD) मार्फत · गति मार्फत प्रसारित"
 issued = "2026-11-17T09:20:00+05:45"
 source_url = "https://bipadportal.gov.np/"
+relayed_by = "Gati"
 note = "Imported from a CAP 1.2 alert. Candidates are the other-language versions and summaries contained in the same alert."
 
 source = """
@@ -26,6 +27,8 @@ must_keep = [
   ["पूर्व–पश्चिम राजमार्ग", "पूर्व-पश्चिम राजमार्ग", "East-West Highway", "East–West Highway"],
 ]
 may_drop = ["46478"]   # BIPAD alert ID: a reference, not safety information
+# For SMS: the place names that must survive (numbers are optional in SMS).
+sms_must_keep = [["लोहन्द्रा", "Lohandra"], ["बेलबारी", "Belbari"]]
 may_add = ["17"]      # English adds the AD date (17 Nov) next to Mangsir 1
 
 [[candidates]]
@@ -40,12 +43,14 @@ Keep away from the stream bank and crossings; flood information: 1155(2).
 
 [[candidates]]
 system = "gati:summary160 ne-np"
+channel = "sms"
 text = """
 मोरङ बेलबारी–२: लोहन्द्रा खोला सतर्कता तहभन्दा माथि, बढ्दै; खतरा तहभन्दा तल (१२५.७१/१२५.८ मि.)
 """
 
 [[candidates]]
 system = "gati:summary160 en"
+channel = "sms"
 text = """
 Morang Belbari-2: Lohandra Khola above warning level, rising; below danger level (125.71/125.8 m)
 """

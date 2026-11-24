@@ -23,7 +23,16 @@ Sachet Eval is the open measurement layer: it scores each stage, so different LL
 - [x] CAP 1.2 importer (`sachet from-cap`): works with any standard public-alert feed
 - [x] Real cases from Gati (CAP 1.2): NDRRMA Narayani **danger-level** alert; DHM Lohandra and Roshi warning-level alerts
 - [x] `may_add` for legitimate additions (e.g. AD dates in English translations)
-- [ ] **Channel profiles**: a strict minimum fact set for SMS (place · level/status · action) vs. the full set for radio and IVR scripts
+- [x] **Meaning checks**: hazard, status above/below warning or danger level, trend, action; flipped meanings flagged
+- [x] **Channel profiles**: SMS (place · status · action, numbers optional) vs. full radio/IVR script
+- [x] **Provenance labels**: official · relayed from official · unverified source
+- [ ] Validate "important" with human annotators (agreement score) and with DHM/NDRRMA, community radio and listeners
+
+### Public portal (next)
+- [ ] GitHub Pages site: paste official alert + rewrite, pick SMS or radio script, see the checklist
+- [ ] Runs in the browser via Pyodide (same tested Python code); nothing is uploaded or stored
+- [ ] Clear wording: "no missing or invented facts found", never "safe to broadcast"; not a verifier of official status
+- [ ] Optional: turn a checked example into a pre-filled GitHub issue to contribute a test case
 - [ ] More real cases: an NDRRMA heavy-rain advisory, a landslide or road-closure notice
 - [ ] Unicode conversion of legacy-font (Preeti-style) PDF text, and measuring how much it recovers
 

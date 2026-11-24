@@ -57,6 +57,7 @@ def cap_to_case_toml(path: str | Path, source_lang: str = "ne", case_id: str | N
         f"issuer = {_toml_line(_t(src, 'senderName'))}",
         f"issued = {_toml_line(_t(root, 'sent'))}",
         f"source_url = {_toml_line(web)}",
+        f"relayed_by = {_toml_line('Gati' if 'Gati' in _t(root, 'note') else '')}",
         f"note = {_toml_line('Imported from a CAP 1.2 alert. Candidates are the other-language versions and summaries contained in the same alert.')}",
         "",
         f"source = {_toml_str(_info_text(src))}",
@@ -72,5 +73,5 @@ def cap_to_case_toml(path: str | Path, source_lang: str = "ne", case_id: str | N
         for p in info.findall("c:parameter", NS):
             name = _t(p, "valueName")
             if name in SUMMARY_PARAMS and _t(p, "value"):
-                out += ["", "[[candidates]]", f"system = {_toml_line(name + ' ' + lang(info))}", f"text = {_toml_str(_t(p, 'value'))}"]
+                out += ["", "[[candidates]]", f"system = {_toml_line(name + ' ' + lang(info))}", 'channel = "sms"', f"text = {_toml_str(_t(p, 'value'))}"]
     return "\n".join(out) + "\n"

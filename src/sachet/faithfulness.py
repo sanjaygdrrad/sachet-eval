@@ -33,7 +33,8 @@ def _present(aliases: list[str], text_norm: str) -> bool:
 
 
 def check_faithfulness(source: str, output: str, must_keep: list[list[str]] | None = None,
-                       may_drop: list[str] | None = None, may_add: list[str] | None = None) -> FaithfulnessResult:
+                       may_drop: list[str] | None = None, may_add: list[str] | None = None,
+                       numbers_optional: bool = False, keep_numbers: list[str] | None = None) -> FaithfulnessResult:
     """Compare ``output`` with ``source``.
 
     ``must_keep`` lists names that must survive, each as a group of acceptable spellings,
@@ -42,10 +43,15 @@ def check_faithfulness(source: str, output: str, must_keep: list[list[str]] | No
     (e.g. "24" in "120 mm in 24 hours"). They may be left out, but never changed.
     ``may_add`` lists values a rewrite may add that are not in the source, such as the
     Gregorian date next to a Bikram Sambat date in an English translation.
+    ``numbers_optional`` (used for short channels like SMS) makes every number, time and
+    date optional, except those listed in ``keep_numbers``. Changed values still fail.
     """
     res = FaithfulnessResult()
     src, out = extract_facts(source), extract_facts(output)
     optional = {f for f in src if any(f in extract_facts(x) for x in (may_drop or []))}
+    if numbers_optional:
+        required = {f for x in (keep_numbers or []) for f in extract_facts(x)}
+        optional |= {f for f in src if f not in required}
 
     # A fact counts once: repeating "1155" twice in the official text doesn't require
     # the rewrite to repeat it. What matters is that it is present, and unchanged.

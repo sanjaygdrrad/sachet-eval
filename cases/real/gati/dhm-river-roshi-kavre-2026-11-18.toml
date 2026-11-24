@@ -10,6 +10,7 @@ language = "ne"
 issuer = "जल तथा मौसम विज्ञान विभाग · विपद् पोर्टल (BIPAD) मार्फत · गति मार्फत प्रसारित"
 issued = "2026-11-19T09:20:00+05:45"
 source_url = "https://bipadportal.gov.np/"
+relayed_by = "Gati"
 note = "Imported from a CAP 1.2 alert. Candidates are the other-language versions and summaries contained in the same alert."
 
 source = """
@@ -25,6 +26,8 @@ must_keep = [
   ["काभ्रे", "Kavre", "Kavrepalanchok"],
 ]
 may_drop = ["46480"]   # BIPAD alert ID: a reference, not safety information
+# For SMS: the place names that must survive (numbers are optional in SMS).
+sms_must_keep = [["रोशी", "Roshi"], ["काभ्रे", "Kavre", "Kavrepalanchok"]]
 may_add = ["18"]      # English adds the AD date (18 Nov) next to Mangsir 2
 
 [[candidates]]
@@ -39,12 +42,14 @@ Keep away from the stream bank and crossings; flood information: 1155(2).
 
 [[candidates]]
 system = "gati:summary160 ne-np"
+channel = "sms"
 text = """
 काभ्रे: रोशी खोला सतर्कता तहभन्दा माथि, बढ्दो; खतरा तहभन्दा तल (३.२२/४.० मि.)
 """
 
 [[candidates]]
 system = "gati:summary160 en"
+channel = "sms"
 text = """
 Kavre: Roshi Khola above warning level, rising; below danger level (3.22/4.0 m)
 """

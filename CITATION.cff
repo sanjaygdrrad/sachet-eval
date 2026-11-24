@@ -4,7 +4,7 @@ title: "Sachet Eval: an evaluation harness for LLM + text-to-speech disaster ale
 authors:
   - family-names: Bhandari
     given-names: Sanzay
-version: 0.3.0
+version: 0.4.0
 date-released: 2026-11-22
 license: MIT
 repository-code: "https://github.com/sanjaygdrrad/sachet-eval"

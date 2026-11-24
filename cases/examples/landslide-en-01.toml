@@ -21,7 +21,7 @@ must_keep = [
 [[candidates]]
 system = "example-faithful"
 text = """
-Warning: Prithvi Highway is closed at Km 42 near Mugling after 120 mm of rain.
+Landslide warning: Prithvi Highway is closed at Km 42 near Mugling after 120 mm of rain.
 It should reopen by 18:00 on 2081-05-12. Please avoid it and go via Narayanghat instead.
 """
 
