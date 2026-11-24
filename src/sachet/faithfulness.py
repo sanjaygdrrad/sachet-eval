@@ -33,13 +33,15 @@ def _present(aliases: list[str], text_norm: str) -> bool:
 
 
 def check_faithfulness(source: str, output: str, must_keep: list[list[str]] | None = None,
-                       may_drop: list[str] | None = None) -> FaithfulnessResult:
+                       may_drop: list[str] | None = None, may_add: list[str] | None = None) -> FaithfulnessResult:
     """Compare ``output`` with ``source``.
 
     ``must_keep`` lists names that must survive, each as a group of acceptable spellings,
     e.g. ``[["नारायणी", "Narayani"], ["देवघाट", "Devghat"]]``.
     ``may_drop`` lists source numbers/times/dates that are context, not safety-critical
     (e.g. "24" in "120 mm in 24 hours"). They may be left out, but never changed.
+    ``may_add`` lists values a rewrite may add that are not in the source, such as the
+    Gregorian date next to a Bikram Sambat date in an English translation.
     """
     res = FaithfulnessResult()
     src, out = extract_facts(source), extract_facts(output)
@@ -53,7 +55,8 @@ def check_faithfulness(source: str, output: str, must_keep: list[list[str]] | No
         res.total += 1
         (res.kept if fact in out else res.missing).append(str(fact))
 
-    for fact in sorted(set(out) - set(src)):
+    allowed_extra = {f for x in (may_add or []) for f in extract_facts(x)}
+    for fact in sorted(set(out) - set(src) - allowed_extra):
         res.invented.append(str(fact))
 
     out_norm = normalize(output)

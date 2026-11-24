@@ -16,7 +16,7 @@ class Row:
 
 
 def run(cases: list[Case]) -> list[Row]:
-    return [Row(c, cand.system, check_faithfulness(c.source, cand.text, c.must_keep, c.may_drop)) for c in cases for cand in c.candidates]
+    return [Row(c, cand.system, check_faithfulness(c.source, cand.text, c.must_keep, c.may_drop, c.may_add)) for c in cases for cand in c.candidates]
 
 
 def to_markdown(rows: list[Row]) -> str:

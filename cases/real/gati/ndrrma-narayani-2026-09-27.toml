@@ -1,0 +1,52 @@
+# Imported from CAP 1.2: ndrrma-narayani-2026-09-27.xml
+# Sender: ndrrma.gov.np. Note from the CAP file: Relayed by Gati (गति), an independent citizen verification project. Gati does not issue official warnings (Disaster Risk Reduction and Management Act 2074). Original: National Disaster Risk Reduction and Management Authority (NDRRMA). Source: https://x.com/NDRRMA_Nepal/status/2104050743875653646
+# Source text and candidates from Gati (गति), https://github.com/nirajbhusal/gati-alerts ,
+# an independent citizen project that relays official notices as CAP 1.2. Gati's own content
+# (translations, summaries) is licensed CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+# The official wording and figures remain those of the issuing agency.
+# Changes by Sachet Eval: removed the later DHM update (Devghat 4.17 m, 5 Oct) that Gati appended, from the source and the English candidate; only the original NDRRMA alert is evaluated.
+id = "ndrrma-narayani-2026-09-27"
+language = "ne"
+issuer = "राष्ट्रिय विपद् जोखिम न्यूनीकरण तथा व्यवस्थापन प्राधिकरण (NDRRMA) — गति मार्फत प्रसारित"
+issued = "2026-09-27T08:00:00+05:45"
+source_url = "https://x.com/NDRRMA_Nepal/status/2104050743875653646"
+note = "Imported from a CAP 1.2 alert. Candidates are the other-language versions and summaries contained in the same alert."
+
+source = """
+नारायणी नदी खतराको तह पार गरेको छ
+
+NDRRMA, असोज ११ बिहान ८ बजे: हालको स्तर ११ मिटर (खतराको तह ११ मिटर); अपेक्षित उच्चतम करिब १३.० मिटर। स्थान: चितवन, नवलपरासी पूर्व, नवलपरासी पश्चिम।
+
+तुरुन्त उच्च तथा सुरक्षित स्थानमा जानुहोस्। किनार र तटीय क्षेत्रबाट टाढा बस्नुहोस्।
+"""
+
+must_keep = [
+  ["नारायणी", "Narayani"],
+  ["चितवन", "Chitwan"],
+  ["नवलपरासी पूर्व", "Nawalparasi East"],
+  ["नवलपरासी पश्चिम", "Nawalparasi West"],
+]
+may_drop = []
+may_add = []
+
+[[candidates]]
+system = "cap-en (in the same alert)"
+text = """
+The Narayani River has crossed the danger level
+
+NDRRMA, Asoj 11, 8 AM: current level 11 m (danger level 11 m); expected peak about 13.0 m. Areas: Chitwan, Nawalparasi East and Nawalparasi West.
+
+Move to high, safe ground now. Stay away from river banks and low-lying areas.
+"""
+
+[[candidates]]
+system = "gati:summary160 ne-np"
+text = """
+नारायणी नदी खतराको तह पार गरेको छ
+"""
+
+[[candidates]]
+system = "gati:summary160 en"
+text = """
+The Narayani River has crossed the danger level
+"""

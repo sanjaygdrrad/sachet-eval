@@ -19,6 +19,7 @@ class Case:
     source: str          # the official alert text
     must_keep: list[list[str]] = field(default_factory=list)
     may_drop: list[str] = field(default_factory=list)
+    may_add: list[str] = field(default_factory=list)
     candidates: list[Candidate] = field(default_factory=list)
     note: str = ""
     issuer: str = ""
@@ -36,7 +37,7 @@ def load_case(path: str | Path) -> Case:
     groups = [g if isinstance(g, list) else [g] for g in data.get("must_keep", [])]
     return Case(
         id=data["id"], language=data["language"], source=data["source"].strip(),
-        must_keep=groups, may_drop=[str(x) for x in data.get("may_drop", [])], note=data.get("note", ""), path=path,
+        must_keep=groups, may_drop=[str(x) for x in data.get("may_drop", [])], may_add=[str(x) for x in data.get("may_add", [])], note=data.get("note", ""), path=path,
         issuer=data.get("issuer", ""), issued=str(data.get("issued", "")), source_url=data.get("source_url", ""),
         candidates=[Candidate(system=c["system"], text=c["text"].strip()) for c in data.get("candidates", [])],
     )

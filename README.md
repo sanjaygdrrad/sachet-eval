@@ -51,6 +51,20 @@ The legacy font encoding drops conjunct letters, so any pipeline that reads the 
 sachet lint cases/real/dhm-flood-bulletin-2078-05-29.raw.txt
 ```
 
+## Finding: human translations are faithful; SMS summaries drop critical facts
+Three real alerts relayed as CAP 1.2 by [Gati](https://github.com/nirajbhusal/gati-alerts) (`cases/real/gati/`): an NDRRMA **danger-level** alert for the Narayani, and DHM **warning-level** alerts for the Lohandra and Roshi rivers. Each contains the official Nepali text, an English translation and 160-character SMS summaries, all written by people.
+
+| Rewrite | Facts kept | Verdict |
+|---|---|---|
+| English translations (3 alerts) | 12/12 · 9/9 · 7/7 | ✅ 100% faithful |
+| 160-character SMS summaries | 45% · 50% · **14%** | ❌ |
+
+The short summaries drop times, warning levels and the 1155 hotline. The Narayani **danger-level** summary keeps only *"the Narayani has crossed the danger level"* and loses **where** (Chitwan, Nawalparasi East/West), **how high** (11 m, peak 13 m) and **what to do**. No rewrite invented a fact. That's the risk to watch for with AI rewrites.
+
+```bash
+sachet eval cases/real/gati/
+```
+
 ## Quick start
 
 Requires Python 3.11+. No other dependencies.
@@ -59,6 +73,7 @@ Requires Python 3.11+. No other dependencies.
 pip install -e ".[dev]"
 sachet eval cases/                       # Markdown report
 sachet lint some-bulletin.txt            # check for corrupted Devanagari
+sachet from-cap alert.xml --out case.toml   # turn a CAP 1.2 alert into a case
 sachet eval cases/ --json --out r.json   # machine-readable
 sachet eval cases/ --strict              # exit code 1 if anything fails (for CI)
 pytest                                   # the evaluator's own tests
@@ -76,6 +91,7 @@ source = """
 """
 must_keep = [["नारायणी", "Narayani"], ["देवघाट", "Devghat"]]
 may_drop  = []          # context numbers that may be omitted
+may_add   = []          # values a rewrite may add (e.g. an AD date next to a BS date)
 source_url = "https://…" # where the official text came from (optional)
 issuer = "…"             # optional
 issued = "…"             # optional
@@ -84,6 +100,10 @@ issued = "…"             # optional
 system = "llm-a-simplify-v1"
 text = """ ... the rewritten alert ... """
 ```
+
+## Data and credits
+- `cases/real/dhm-flood-bulletin-2078-05-29.*`: DHM Flood Forecast Bulletin, republished by DAO Bhojpur (link in the file).
+- `cases/real/gati/`: alerts relayed by **Gati (गति)**, [github.com/nirajbhusal/gati-alerts](https://github.com/nirajbhusal/gati-alerts). Gati's translations and summaries are licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Official wording and figures remain the issuing agencies' (DHM, NDRRMA). Changes made for evaluation are noted at the top of each file.
 
 ## Principles
 - **Public data only.** Cases use public bulletins or clearly-labelled illustrative examples; no personal data.

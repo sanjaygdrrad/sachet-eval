@@ -20,7 +20,11 @@ Sachet Eval is the open measurement layer: it scores each stage, so different LL
 - [ ] Units-aware comparison (6.8 m vs 680 cm)
 - [x] First real case: DHM Flood Forecast Bulletin, 2078-05-29 (`cases/real/`), with source link and metadata
 - [x] `sachet lint`: detects Devanagari corrupted by legacy-font PDF extraction (finding: 9% broken words in the copied bulletin)
-- [ ] More real cases: a bulletin **above danger level**, an NDRRMA heavy-rain advisory, a public SMS alert
+- [x] CAP 1.2 importer (`sachet from-cap`): works with any standard public-alert feed
+- [x] Real cases from Gati (CAP 1.2): NDRRMA Narayani **danger-level** alert; DHM Lohandra and Roshi warning-level alerts
+- [x] `may_add` for legitimate additions (e.g. AD dates in English translations)
+- [ ] **Channel profiles**: a strict minimum fact set for SMS (place · level/status · action) vs. the full set for radio and IVR scripts
+- [ ] More real cases: an NDRRMA heavy-rain advisory, a landslide or road-closure notice
 - [ ] Unicode conversion of legacy-font (Preeti-style) PDF text, and measuring how much it recovers
 
 ### Phase 2: intelligibility

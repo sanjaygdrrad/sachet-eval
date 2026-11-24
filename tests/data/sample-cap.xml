@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Minimal synthetic CAP 1.2 alert for tests (illustrative values). -->
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>test-1</identifier><sender>example.gov.np</sender><sent>2026-09-27T08:00:00+05:45</sent>
+  <status>Actual</status><msgType>Alert</msgType><scope>Public</scope><note>Synthetic test alert.</note>
+  <info><language>ne-NP</language><category>Met</category><event>बाढी</event><urgency>Immediate</urgency>
+    <severity>Severe</severity><certainty>Likely</certainty><senderName>परीक्षण</senderName>
+    <headline>नदी खतराको तह पार</headline><description>स्तर ११ मिटर।</description><instruction>उच्च स्थानमा जानुहोस्।</instruction>
+    <web>https://example.gov.np/a</web>
+    <parameter><valueName>gati:summary160</valueName><value>नदी खतराको तह पार</value></parameter></info>
+  <info><language>en</language><category>Met</category><event>Flood</event><urgency>Immediate</urgency>
+    <severity>Severe</severity><certainty>Likely</certainty><senderName>Test</senderName>
+    <headline>River above danger level</headline><description>Level 11 m.</description><instruction>Move to high ground.</instruction></info>
+</alert>

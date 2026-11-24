@@ -1,0 +1,51 @@
+# Imported from CAP 1.2: dhm-river-lohandra-belbari-2026-11-17.xml
+# Sender: hydrology.gov.np. Note from the CAP file: Relayed by Gati (गति), an independent citizen verification project. Gati does not issue official warnings (Disaster Risk Reduction and Management Act 2074). Original: DHM river-gauge warning as published on the BIPAD Portal (NDRRMA), alert 46478. Source: https://bipadportal.gov.np/
+# Source text and candidates from Gati (गति), https://github.com/nirajbhusal/gati-alerts ,
+# an independent citizen project that relays official notices as CAP 1.2. Gati's own content
+# (translations, summaries) is licensed CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+# The official wording and figures remain those of the issuing agency.
+# Changes by Sachet Eval: none (fields copied as published).
+id = "dhm-river-lohandra-belbari-2026-11-17"
+language = "ne"
+issuer = "जल तथा मौसम विज्ञान विभाग · विपद् पोर्टल (BIPAD) मार्फत · गति मार्फत प्रसारित"
+issued = "2026-11-17T09:20:00+05:45"
+source_url = "https://bipadportal.gov.np/"
+note = "Imported from a CAP 1.2 alert. Candidates are the other-language versions and summaries contained in the same alert."
+
+source = """
+मोरङ, बेलबारी–२: लोहन्द्रा खोला (पूर्व–पश्चिम राजमार्ग) सतर्कता तहभन्दा माथि, बढ्दै
+
+आधिकारिक (DHM, विपद् पोर्टल अलर्ट ४६४७८, मंसिर १ बिहान ८:४० बजे): केशलिया बेसिनको लोहन्द्रा खोला (पूर्व–पश्चिम राजमार्ग स्टेशन) सतर्कता तह (१२५.३ मि.) भन्दा माथि छ। बिहान ९:०० बजेको स्टेशन तथ्यांकमा जलस्तर १२५.७१ मि. (खतरा तह १२५.८ मि.), बढ्दो। अघिल्लो दुई दिन पनि यही स्टेशनले सतर्कता तह पार गरेको थियो।
+
+खोला किनार र पार गर्ने ठाउँबाट टाढा रहनुहोस्; बाढी सूचना: ११५५(२)।
+"""
+
+must_keep = [
+  ["लोहन्द्रा", "Lohandra"],
+  ["बेलबारी", "Belbari"],
+  ["पूर्व–पश्चिम राजमार्ग", "पूर्व-पश्चिम राजमार्ग", "East-West Highway", "East–West Highway"],
+]
+may_drop = ["46478"]   # BIPAD alert ID: a reference, not safety information
+may_add = ["17"]      # English adds the AD date (17 Nov) next to Mangsir 1
+
+[[candidates]]
+system = "cap-en (in the same alert)"
+text = """
+Morang, Belbari-2: Lohandra Khola (East-West Highway) above warning level and rising
+
+Official (DHM, BIPAD Portal alert 46478, Mangsir 1 / 17 Nov, 8:40 AM): the Lohandra Khola at the East-West Highway gauge (Keshaliya basin) is above its warning level (125.3 m). At the 9:00 AM station reading the water level was 125.71 m against a danger level of 125.8 m, rising. The same gauge also crossed warning level on the previous two days.
+
+Keep away from the stream bank and crossings; flood information: 1155(2).
+"""
+
+[[candidates]]
+system = "gati:summary160 ne-np"
+text = """
+मोरङ बेलबारी–२: लोहन्द्रा खोला सतर्कता तहभन्दा माथि, बढ्दै; खतरा तहभन्दा तल (१२५.७१/१२५.८ मि.)
+"""
+
+[[candidates]]
+system = "gati:summary160 en"
+text = """
+Morang Belbari-2: Lohandra Khola above warning level, rising; below danger level (125.71/125.8 m)
+"""

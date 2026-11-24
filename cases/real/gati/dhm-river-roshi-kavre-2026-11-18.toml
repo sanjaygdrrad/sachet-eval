@@ -1,0 +1,50 @@
+# Imported from CAP 1.2: dhm-river-roshi-kavre-2026-11-18.xml
+# Sender: hydrology.gov.np. Note from the CAP file: Relayed by Gati (गति), an independent citizen verification project. Gati does not issue official warnings (Disaster Risk Reduction and Management Act 2074). Original: DHM river-gauge warning as published on the BIPAD Portal (NDRRMA), alert 46480. Source: https://bipadportal.gov.np/
+# Source text and candidates from Gati (गति), https://github.com/nirajbhusal/gati-alerts ,
+# an independent citizen project that relays official notices as CAP 1.2. Gati's own content
+# (translations, summaries) is licensed CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+# The official wording and figures remain those of the issuing agency.
+# Changes by Sachet Eval: none (fields copied as published).
+id = "dhm-river-roshi-kavre-2026-11-18"
+language = "ne"
+issuer = "जल तथा मौसम विज्ञान विभाग · विपद् पोर्टल (BIPAD) मार्फत · गति मार्फत प्रसारित"
+issued = "2026-11-19T09:20:00+05:45"
+source_url = "https://bipadportal.gov.np/"
+note = "Imported from a CAP 1.2 alert. Candidates are the other-language versions and summaries contained in the same alert."
+
+source = """
+काभ्रे: रोशी खोला (रोशी पुल) सतर्कता तहभन्दा माथि, बढ्दो
+
+आधिकारिक (DHM, विपद् पोर्टल अलर्ट ४६४८०, मंसिर २ साँझ ५:२० बजे): कोशी बेसिनको रोशी खोला (काभ्रे, रोशी पुल स्टेशन) सतर्कता तह (३.० मि.) भन्दा माथि छ। जलस्तर ३.२२ मि. (खतरा तह ४.० मि.), बढ्दो।
+
+खोला किनार र पार गर्ने ठाउँबाट टाढा रहनुहोस्; बाढी सूचना: ११५५(२)।
+"""
+
+must_keep = [
+  ["रोशी", "Roshi"],
+  ["काभ्रे", "Kavre", "Kavrepalanchok"],
+]
+may_drop = ["46480"]   # BIPAD alert ID: a reference, not safety information
+may_add = ["18"]      # English adds the AD date (18 Nov) next to Mangsir 2
+
+[[candidates]]
+system = "cap-en (in the same alert)"
+text = """
+Kavrepalanchok: Roshi Khola (Roshi Bridge) above warning level, rising
+
+Official (DHM, BIPAD Portal alert 46480, Mangsir 2 / 18 Nov, 5:20 PM): the Roshi Khola at the Roshi Bridge gauge, Kavrepalanchok (Koshi basin), is above its warning level (3.0 m). The water level was 3.22 m against a danger level of 4.0 m, and rising.
+
+Keep away from the stream bank and crossings; flood information: 1155(2).
+"""
+
+[[candidates]]
+system = "gati:summary160 ne-np"
+text = """
+काभ्रे: रोशी खोला सतर्कता तहभन्दा माथि, बढ्दो; खतरा तहभन्दा तल (३.२२/४.० मि.)
+"""
+
+[[candidates]]
+system = "gati:summary160 en"
+text = """
+Kavre: Roshi Khola above warning level, rising; below danger level (3.22/4.0 m)
+"""
