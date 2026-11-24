@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sachet · सचेत: check a rewritten disaster alert</title>
+  <meta name="description" content="Paste an official flood or landslide alert from Nepal and a rewritten version (SMS, radio script, translation). Sachet shows what was kept, lost, invented or flipped. Runs in your browser; nothing is uploaded.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@400..650&family=Anek+Devanagari:wght@400..650&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <p class="brand"><span class="mark">स</span> Sachet <span class="ne" lang="ne">सचेत</span></p>
+      <a class="gh" href="https://github.com/sanjaygdrrad/sachet-eval">Source on GitHub ↗</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <h1>Does the rewritten alert still say what the official alert said?</h1>
+      <p>Paste an official flood or landslide alert and a rewritten version: an SMS, a radio script, a translation, or an AI's simplification.
+        Sachet checks every level, time, place and instruction, and shows what was <strong>kept</strong>, <strong>lost</strong>, <strong>invented</strong> or <strong>flipped</strong>.</p>
+      <p class="privacy">🔒 Runs entirely in your browser. Nothing you paste is uploaded or stored.</p>
+    </section>
+
+    <section class="examples" aria-label="Load an example">
+      <span>Try a real example (NDRRMA, Narayani above danger level):</span>
+      <button type="button" data-example="en">English translation</button>
+      <button type="button" data-example="sms">SMS summary</button>
+      <button type="button" data-example="flip">AI-style mistake</button>
+    </section>
+
+    <form id="form" class="form" novalidate>
+      <div class="pair">
+        <label class="box">
+          <span class="lbl">1 · Official alert <span lang="ne">आधिकारिक सूचना</span></span>
+          <textarea id="source" rows="10" lang="ne" placeholder="Paste the alert exactly as the agency (DHM, NDRRMA…) published it."></textarea>
+          <span class="hint" id="integrity-hint"></span>
+        </label>
+        <label class="box">
+          <span class="lbl">2 · Rewritten version <span lang="ne">पुनर्लेखन</span></span>
+          <textarea id="rewrite" rows="10" lang="ne" placeholder="Paste the SMS, radio script, translation or AI output to check."></textarea>
+        </label>
+      </div>
+
+      <fieldset class="channel">
+        <legend>3 · Where will it be used?</legend>
+        <label><input type="radio" name="channel" value="full" checked> <strong>Radio / phone / full message</strong>: must keep every fact</label>
+        <label><input type="radio" name="channel" value="sms"> <strong>SMS</strong>: must keep place, status and action; numbers optional, but never wrong</label>
+      </fieldset>
+
+      <label class="box names">
+        <span class="lbl">4 · Places that must not be lost <span class="opt">(rivers, stations, districts: comma-separated; alternative spellings with "/")</span></span>
+        <input id="names" type="text" lang="ne" placeholder="नारायणी / Narayani, चितवन / Chitwan, देवघाट / Devghat">
+      </label>
+
+      <details class="advanced">
+        <summary>Advanced options</summary>
+        <label class="box"><span class="lbl">Numbers that may be left out <span class="opt">(e.g. reference IDs)</span></span><input id="may_drop" type="text" placeholder="46478"></label>
+        <label class="box"><span class="lbl">Values the rewrite may add <span class="opt">(e.g. an AD date next to a BS date)</span></span><input id="may_add" type="text" placeholder="17"></label>
+        <label class="box"><span class="lbl">Numbers an SMS must keep</span><input id="sms_numbers" type="text" placeholder="11"></label>
+      </details>
+
+      <button id="run" class="run" type="submit" disabled>Loading the checker…</button>
+      <p class="loading" id="loading">Loading Sachet (about 10 MB, first visit only)…</p>
+    </form>
+
+    <section id="result" class="result" aria-live="polite" hidden></section>
+
+    <section class="about">
+      <h2>What Sachet checks</h2>
+      <ul>
+        <li><strong>Numbers, times, dates:</strong> water levels, thresholds, times, the 1155 hotline. Devanagari and Latin digits count as equal (६.८ = 6.8).</li>
+        <li><strong>Places:</strong> the names you list above, in any of the spellings you give.</li>
+        <li><strong>Meaning:</strong> the hazard, the status (above or below the warning or danger level), the trend (rising or falling) and the action (move to high ground, keep away from the river).</li>
+        <li><strong>Nothing invented or flipped:</strong> no new numbers, and "above" never becomes "below".</li>
+      </ul>
+      <h2>What Sachet does not do</h2>
+      <ul>
+        <li>It does <strong>not</strong> confirm that an alert is official. Check the issuing agency: <a href="https://www.dhm.gov.np/">DHM</a>, <a href="https://bipadportal.gov.np/">BIPAD Portal</a>, <a href="https://ndrrma.gov.np/">NDRRMA</a>. Flood information: <strong>1155</strong>.</li>
+        <li>A clean result means <em>"no missing, invented or flipped facts found"</em>, not <em>"safe to broadcast"</em>. A person should always review a message before it goes out.</li>
+        <li>Checks are rule-based and still being validated. Unusual wording can be missed.</li>
+      </ul>
+      <p class="credit">Examples use alerts relayed by <a href="https://github.com/nirajbhusal/gati-alerts">Gati (गति)</a>, CC BY 4.0. Built by <a href="https://sanzay.com.np">Sanzay Bhandari</a> · MIT licence.</p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

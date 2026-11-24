@@ -28,11 +28,12 @@ Sachet Eval is the open measurement layer: it scores each stage, so different LL
 - [x] **Provenance labels**: official · relayed from official · unverified source
 - [ ] Validate "important" with human annotators (agreement score) and with DHM/NDRRMA, community radio and listeners
 
-### Public portal (next)
-- [ ] GitHub Pages site: paste official alert + rewrite, pick SMS or radio script, see the checklist
-- [ ] Runs in the browser via Pyodide (same tested Python code); nothing is uploaded or stored
-- [ ] Clear wording: "no missing or invented facts found", never "safe to broadcast"; not a verifier of official status
-- [ ] Optional: turn a checked example into a pre-filled GitHub issue to contribute a test case
+### Public portal ✅ (v0.5)
+- [x] GitHub Pages site: paste official alert + rewrite, pick SMS or radio script, see the checklist
+- [x] Runs in the browser via Pyodide (same tested Python code); nothing is uploaded or stored
+- [x] Clear wording: "no missing, invented or flipped facts found", never "safe to broadcast"; not a verifier of official status
+- [x] Turn a checked example into a pre-filled GitHub issue to contribute a test case
+- [ ] Nepali-language interface
 - [ ] More real cases: an NDRRMA heavy-rain advisory, a landslide or road-closure notice
 - [ ] Unicode conversion of legacy-font (Preeti-style) PDF text, and measuring how much it recovers
 

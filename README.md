@@ -4,11 +4,13 @@
 
 **An open evaluation harness for AI-generated disaster alerts in Nepal.**
 
+**[→ Try it in your browser](https://sanjaygdrrad.github.io/sachet-eval/)**: paste an official alert and a rewrite (SMS, radio script, translation, AI output) and see what was kept, lost, invented or flipped. It runs entirely in your browser; nothing is uploaded.
+
 Every monsoon, official flood and landslide warnings in Nepal are technical, Nepali-only and slow to reach the people most at risk. Large language models (LLMs) can rewrite them into plain, local-language scripts, and text-to-speech (TTS) can turn those scripts into voice for radio, phone calls and loudspeakers.
 
 But an alert that is easy to understand and **wrong** is worse than no alert. *Sachet* (सचेत, "alert, aware") tests whether AI pipelines can be trusted with that job.
 
-> **Status:** early research tool (v0.4). Factual faithfulness and text-integrity checks work today, tested on a **real DHM flood bulletin** (`cases/real/`) and on clearly-labelled illustrative examples (`cases/examples/`).
+> **Status:** early research tool (v0.5). Factual faithfulness and text-integrity checks work today, tested on a **real DHM flood bulletin** (`cases/real/`) and on clearly-labelled illustrative examples (`cases/examples/`).
 
 ## What it checks
 
@@ -119,6 +121,21 @@ issued = "…"             # optional
 [[candidates]]
 system = "llm-a-simplify-v1"
 text = """ ... the rewritten alert ... """
+```
+
+## Public portal
+`portal/` is a static web page published to GitHub Pages by `.github/workflows/portal.yml`. It loads the **same Sachet Python package** into the browser with [Pyodide](https://pyodide.org) (Python compiled to WebAssembly), so the website and the command line give identical results, and every portal result is covered by the test suite (`tests/test_portal.py`).
+
+- Visitors paste the official alert and the rewrite, choose **SMS** or **radio/phone script**, and optionally list the places that must not be lost.
+- Results show **flipped meaning**, **invented**, **missing** and **kept** facts, plus a warning if the official text looks corrupted.
+- Wording is deliberate: *"no missing, invented or flipped facts found"*, never *"safe to broadcast"*. The page states that Sachet does not verify whether an alert is official.
+- A checked example can be suggested as a new test case through a pre-filled GitHub issue, reviewed before it is added.
+
+Run it locally:
+
+```bash
+python scripts/build_portal.py
+python -m http.server -d _site 8000     # open http://localhost:8000
 ```
 
 ## Data and credits
